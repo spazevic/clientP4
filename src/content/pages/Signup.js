@@ -1,5 +1,6 @@
 // Packages
 import React, { useState } from 'react'
+import { Redirect } from 'react-router-dom'
 
 const Signup = props => {
   // Declare and initialize state variables
@@ -13,6 +14,38 @@ const Signup = props => {
   const handleSubmit = e => {
     e.preventDefault()
     // TODO: Send the user sign up data to the server
+    fetch(process.env.REACT_APP_SERVER_URL + 'auth/signup', {
+      method: 'POST',
+      body: JSON.stringify({
+        email,
+        password,
+        firstname,
+        lastname,
+        pic: profileUrl
+      }),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(response => {
+      console.log('Response', response)
+      if (!response.ok) {
+        setMessage(`${response.status}: ${response.statusText}`)
+        return
+      }
+
+      response.json().then(result => {
+        console.log('Result', result)
+        props.updateToken(result.token)
+      })
+    })
+    .catch(err => {
+      console.log('Error submitting login info', err)
+    })
+  }
+
+  if (props.user) {
+    return <Redirect to="/profile" />
   }
 
   return (
