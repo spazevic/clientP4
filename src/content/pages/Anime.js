@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react'
+const Anime = props => {
 
-
-const Home = props => {
 	useEffect(() => {
 		getAnimeData()
 	}, [])
@@ -15,13 +14,13 @@ const Home = props => {
 			console.log(err)
 		})
 	}
-			
-
   return (
     <div>
-      <h2>HOME STUB</h2>
+      Anime Stub!
+      <form>
+      	
+      </form>
     </div>
   )
 }
-
-export default Home
+export default Anime
