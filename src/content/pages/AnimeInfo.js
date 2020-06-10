@@ -1,26 +1,27 @@
 import React, {useEffect, useState} from 'react'
-const Anime = props => {
-
+const AnimeInfo = props => {
+	let [animeData, setAnimeData] = useState({})
 	useEffect(() => {
 		getAnimeData()
 	}, [])
 	const getAnimeData = () => {
-		fetch('https://api.jikan.moe/v3/search/anime?q=Naruto&page=1')
+		fetch('https://api.jikan.moe/v3/anime/' + props.animeId)
 		.then(response => response.json())
 		.then(data => {
 			console.log(data)
+			setAnimeData(data)
 		})
 		.catch(err => {
 			console.log(err)
 		})
 	}
+	console.log(props.animeId)
   return (
     <div>
-      Anime Stub!
-      <form>
-      	
-      </form>
+      AnimeInfo Stub!
+      {props.animeId}
+      {animeData.title}
     </div>
   )
 }
-export default Anime
+export default AnimeInfo
