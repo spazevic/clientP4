@@ -28,6 +28,9 @@ const Nav = props => {
         <li>
           <a href="#" onClick={handleLogout}>Logout</a>
         </li>
+        <li>
+          <Link to="/anime">Anime Page</Link>
+        </li>
       </span>
     )
   }
