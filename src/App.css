@@ -50,6 +50,11 @@ nav a:visited {
   color: mediumspringgreen;
 }
 
+.animeContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
 nav a:hover {
   color: hotpink;
 }

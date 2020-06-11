@@ -24,7 +24,6 @@ const AnimeSearch = props => {
 		})
 	}
 
-
 	const setName = (name) => {
 		console.log(name)
 		let tester = name.split(' ')
@@ -49,9 +48,10 @@ const AnimeSearch = props => {
 	let animeShow = animeList.map((a, i) => {
 		return (
 			<div key={i} onClick={() => getId(a.mal_id)}>
-			{a.title}
-			{a.mal_id}
-			<Link to='/animeinfo'>Go to Anime Page</Link>
+			<Link to='/animeinfo'>
+			<div>{a.title}</div>
+			<img src={a.image_url} />
+			</Link>
 			</div>
 		)
 	})
@@ -63,7 +63,9 @@ const AnimeSearch = props => {
       	<input name='name' type='text'onChange={e => 
       		setName(e.target.value)}/>
       </form>
+      <div className="animeContainer">
       {animeShow}
+      </div>
     </div>
   )
 }
