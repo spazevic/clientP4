@@ -53,10 +53,9 @@ const Signup = props => {
       <h2>Signup</h2>
       <span className="red">{message}</span>
       <form onSubmit={handleSubmit}>
-        <div>
+        <div class="signupB">
           <label>First Name:</label>
           <input name="firstname" placeholder="Your first name" onChange={e => setFirstname(e.target.value)} />
-        </div>
         <div>
           <label>Last Name:</label>
           <input name="lastname" placeholder="Your last name" onChange={e => setLastname(e.target.value)} />
@@ -74,8 +73,9 @@ const Signup = props => {
           <input type="url" name="profileUrl" onChange={e => setProfileUrl(e.target.value)} />
         </div>
         <button type="submit">Sign Me Up!</button>
+        </div>
       </form>
-      <div>
+      <div class="soundCloud">
       <iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/306495735&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"></iframe>
       <div style={{fontSize: "10px", color: "#cccccc",lineBreak: "anywhere", wordBreak: "normal", overflow: "hidden", whiteSpace: "nowrap", textOverflow: "ellipsis", fontFamily: "Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif", fontWeight: "100"}}>
       <a href="https://soundcloud.com/luiz-alves-625547605" title="ANIMES" target="_blank" style={{color: "#cccccc", textDecoration: "none"}}>ANIMES</a> · <a href="https://soundcloud.com/luiz-alves-625547605/sparkle-kimi-no-na-wa-your-name-ost" title="Sparkle Kimi No Na Wa. (Your Name.) OST" target="_blank" style={{color: "#cccccc", textDecoration: "none"}}>Sparkle Kimi No Na Wa. (Your Name.) OST</a></div>

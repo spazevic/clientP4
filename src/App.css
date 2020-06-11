@@ -14,7 +14,7 @@
 }
 
 main {
-  padding: 50px 0;
+  padding: 0px 0;
 }
 
 footer {
@@ -29,7 +29,7 @@ footer {
 }
 
 nav {
-  background-color: #282c34;
+  background-color: white;
   padding: 2px;
 }
 
@@ -47,7 +47,7 @@ nav a,
 nav a:visited {
   text-decoration: none;
   font-size: 22px;
-  color: mediumspringgreen;
+  color: olive;
 }
 
 .animeContainer {
@@ -63,4 +63,49 @@ nav a:hover {
   color: red;
 }
 
+.leeDrops {
+  /* opacity:0.45;
+  -moz-opacity:0.45;
+  filter:alpha(opacity=45); */
+  background-image: url(https://data.whicdn.com/images/331884903/original.gif);
+  /* background-repeat: no-repeat; */
+  /* position:absolute; */
+  /* height:48px;
+  width:48px;
+  z-index:10; */
+height: 80vh;
+background-size: cover; 
+background-position: center;
+object-fit: cover;
+}
+.profileB {
+background-image: url(https://steamuserimages-a.akamaihd.net/ugc/781858274434559240/5A111FF68B6C3C22EBA7147BFD87232C12D2AAD3/);
+height: 80vh;
+background-size: cover; 
+background-position: center;
+object-fit:cover;
+}
+.loginB {
+background-image: url(https://i.pinimg.com/originals/37/c1/2e/37c12ec385fb3db0aaea139bcaf81177.gif);
+height: 80vh;
+background-size: cover; 
+background-position: center;
+object-fit:cover;
+}
 
+.signupB {
+  background-image: url(https://media2.giphy.com/media/3ohjV6G9UwkB190zbq/giphy.gif);
+  height: 80vh;
+  background-size: cover; 
+  background-position: center;
+  object-fit:cover;
+  }
+
+.soundCloud {
+  background-position: bottom;
+ 
+}
+
+h2 {
+  margin: 0;                
+}
