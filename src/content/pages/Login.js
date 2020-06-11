@@ -46,20 +46,24 @@ const Login = props => {
 
   return (
     <div>
-      <h2>Login</h2>
+      <div>
+        <h2>
+          
+        </h2>
+      </div>
+      
       <span className="red">{message}</span>
       <form onSubmit={handleSubmit}>
-          <div>
-            <label>Email:</label>
+          <div class='loginB'>
+          <label>Email:</label>
             <input type="email" name="email" onChange={e => setEmail(e.target.value)} />
-          </div>
-          <div>
             <label>Password:</label>
             <input type="password" name="password" onChange={e => setPassword(e.target.value)} />
+          <button type="submit">Login In!</button>
           </div>
-          <button type="submit">Beam Me Up!</button>
+            
         </form>
-        <div>
+        <div class="soundCloud">
         <iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/772235665&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"></iframe>
         <div style={{fontSize: "10px", color: "#cccccc",lineBreak: "anywhere", wordBreak: "normal", overflow: "hidden", whiteSpace: "nowrap", textOverflow: "ellipsis", fontFamily: "Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif", fontWeight: "100"}}>
         <a href="https://soundcloud.com/cyclop-water-boi" title="WhiteIce" target="_blank" style={{color: "#cccccc", textDecoration: "none"}}>WhiteIce</a> · <a href="https://soundcloud.com/cyclop-water-boi/demon-slayer-op" title="Demon Slayer OP" target="_blank" style={{color: "#cccccc", textDecoration: "none"}}>Demon Slayer OP</a></div>
