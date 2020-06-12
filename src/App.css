@@ -92,6 +92,13 @@ background-size: cover;
 background-position: center;
 object-fit:cover;
 }
+.animeSearchB {
+background-image: url(https://46.media.tumblr.com/c0818f581312a5e3988b9e350e1a309c/tumblr_pahxliThXx1xw1khso4_540.gif);
+height: 40vh;
+background-size: cover; 
+background-position: center;
+object-fit:cover;
+}
 
 .signupB {
   background-image: url(https://media2.giphy.com/media/3ohjV6G9UwkB190zbq/giphy.gif);
