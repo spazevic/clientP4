@@ -80,7 +80,7 @@ object-fit: cover;
 }
 .profileB {
 background-image: url(https://steamuserimages-a.akamaihd.net/ugc/781858274434559240/5A111FF68B6C3C22EBA7147BFD87232C12D2AAD3/);
-height: 80vh;
+height: 20vh;
 background-size: cover; 
 background-position: center;
 object-fit:cover;
@@ -103,6 +103,7 @@ object-fit:cover;
 
 .soundCloud {
   background-position: bottom;
+  bottom: 0;
  
 }
 
