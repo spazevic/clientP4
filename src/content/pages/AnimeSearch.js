@@ -59,7 +59,7 @@ const AnimeSearch = props => {
   return (
 	  <div>
     <div class="animeSearchB">
-      Anime Stubsss!
+      Anime Stub!
       <form onSubmit={getAnimeData}>
       	<input name='name' type='text'onChange={e => 
       		setName(e.target.value)}/>
