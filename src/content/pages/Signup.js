@@ -10,6 +10,8 @@ const Signup = props => {
   let [message, setMessage] = useState('')
   let [password, setPassword] = useState('')
   let [profileUrl, setProfileUrl] = useState('')
+  let [username, setUsername] = useState('')
+  let [bio, setBio] = useState('')
 
   const handleSubmit = e => {
     e.preventDefault()
@@ -21,7 +23,9 @@ const Signup = props => {
         password,
         firstname,
         lastname,
-        pic: profileUrl
+        pic: profileUrl,
+        username,
+        bio
       }),
       headers: {
         'Content-Type': 'application/json'
@@ -71,6 +75,14 @@ const Signup = props => {
         <div>
           <label>Profile Pic URL:</label>
           <input type="url" name="profileUrl" onChange={e => setProfileUrl(e.target.value)} />
+        </div>
+        <div>
+          <label>Username:</label>
+          <input name="username" type='text' onChange={e => setUsername(e.target.value)} />
+        </div>
+        <div>
+          <label>Bio:</label>
+          <input name="bio" type="textarea" onChange={e => setBio(e.target.value)} />
         </div>
         <button type="submit">Sign Me Up!</button>
         </div>
