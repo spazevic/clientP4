@@ -23,7 +23,7 @@ const AnimeInfo = props => {
 	}
 	console.log(props.animeId)
 
-	const addComment = () => {
+	const addCommentData = () => {
   		fetch(process.env.REACT_APP_SERVER_URL + 'comment', {
 	      method: 'POST',
 	      body: JSON.stringify({
@@ -41,7 +41,11 @@ const AnimeInfo = props => {
 		})
 	}
 
-	const addNewComment = () => {
+	const addNewComment = e => {
+		e.preventDefault()
+		if (!comments.length) {
+			addCommentData()
+		}
   		fetch(process.env.REACT_APP_SERVER_URL + 'comment', {
 	      method: 'PUT',
 	      body: JSON.stringify({
@@ -154,9 +158,6 @@ const AnimeInfo = props => {
     	<div>
     		{animeData.title}
     	</div>
-    	<form onSubmit={addComment}>
-    		<input type='submit' value='Add Comment' />
-    	</form>
     	<div>hi</div>
     	<form onSubmit={addNewComment}>
     		<input type='text' name='newComment' type='text'onChange={e => 
@@ -174,6 +175,10 @@ const AnimeInfo = props => {
       		{genreList}
       		{commentList}
       	</div>
+      	<form>
+      		<input type='number' min='1' max='10' />
+      		<input type='submit' value ='Give a rating' />
+      	</form>
 	  <div>
 	  <iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/241059426&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"></iframe>
       <div style={{fontSize: "10px", color: "#cccccc",lineBreak: "anywhere", wordBreak: "normal", overflow: "hidden", whiteSpace: "nowrap", textOverflow: "ellipsis", fontFamily: "Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif", fontWeight: "100"}}>
