@@ -57,22 +57,24 @@ const AnimeSearch = props => {
 	})
 
   return (
-    <div>
+	  <div>
+    <div class="animeSearchB">
       Anime Stub!
       <form onSubmit={getAnimeData}>
       	<input name='name' type='text'onChange={e => 
       		setName(e.target.value)}/>
       </form>
+	  </div>
       <div className="animeContainer">
       {animeShow}
       </div>
 
 	  <div>
-	  <iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/625034931&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"></iframe>
+	  <iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/389247156&color=%23b98eef&auto_play=true&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"></iframe>
       <div style={{fontSize: "10px", color: "#cccccc",lineBreak: "anywhere", wordBreak: "normal", overflow: "hidden", whiteSpace: "nowrap", textOverflow: "ellipsis", fontFamily: "Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif", fontWeight: "100"}}>
-	  <a href="https://soundcloud.com/user-943653299" title="KayleeKat" target="_blank" style={{color: "#cccccc", textDecoration: "none"}}>KayleeKat</a> · <a href="https://soundcloud.com/user-943653299/oi-oi-oi-bakugou-remix" title="Oi Oi Oi /Bakugou Remix/" target="_blank" style={{color: "#cccccc", textDecoration: "none"}}>Oi Oi Oi /Bakugou Remix/</a></div>
+	  <a href="https://soundcloud.com/user-496097060" title="ᴍᴀɢɪɪ" target="_blank" style={{color: "#cccccc", textDecoration: "none"}}>ᴍᴀɢɪɪ</a> · <a href="https://soundcloud.com/user-496097060/1-hour-of-wii-music-1" title="Wii Music" target="_blank" style={{color: "#cccccc", textDecoration: "none"}}>BUM BUM BUMMMM DEE DUMMM</a></div>
 	  </div>
-    </div>
+	  </div>
   )
 }
 export default AnimeSearch
