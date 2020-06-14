@@ -4,11 +4,11 @@ const AnimeInfo = props => {
 	let [newComment, setNewComment] = useState('')
 	let [comments, setComments] = useState({})
 	let [userList, setUserList] = useState([])
+	let [userRating, setUserRating] = useState()
 	useEffect(() => {
 		getAnimeData()
 		getComments()
 		findUsers()
-		console.log(props.user)
 	}, [])
 	const getAnimeData = () => {
 		fetch('https://api.jikan.moe/v3/anime/' + props.animeId)
@@ -106,6 +106,29 @@ const AnimeInfo = props => {
 		})
 	}
 
+	const addNewFaves = () => {
+  		fetch(process.env.REACT_APP_SERVER_URL + 'favorites', {
+	      method: 'Put',
+	      body: JSON.stringify({
+	      	user: props.user._id,
+	      	title: animeData.title,
+            rating: userRating,
+            genre: animeData.genres,
+            animeId: props.animeId 
+
+	      }),
+	      headers: {
+	        'Content-Type': 'application/json'
+	      }
+	    })
+	    .then(response => {
+	    	console.log(response)
+	    })
+	    .catch(err => {
+	    	console.log(err)
+		})
+	}
+
 	const findUsers = () => {
 		fetch(process.env.REACT_APP_SERVER_URL + 'auth/users', {
 	      method: 'GET',
@@ -137,6 +160,7 @@ const AnimeInfo = props => {
 		console.log('hi')
 		console.log(animeData.genres[0])
 		genreList = animeData.genres.map((g, i) => {
+			console.log(g.name)
 			return (
 				<div key = {i}>
 				{g.name}
@@ -196,11 +220,12 @@ const AnimeInfo = props => {
       		{genreList}
       		{commentList}
       	</div>
-      	<form>
-      		<input type='submit' value='create rating' onSubmit={addFavesData} />
+      	<form onSubmit={addFavesData}>
+      		<input type='submit' value='create rating' />
       	</form>
-      	<form>
-      		<input type='number' min='1' max='10' />
+      	<form onSubmit={addNewFaves}>
+      		<input type='number' min='1' max='10' onChange={e => 
+      		setUserRating(e.target.value)}/>
       		<input type='submit' value ='Give a rating' />
       	</form>
 	  <div>
