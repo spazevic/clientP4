@@ -1,5 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import { Link } from 'react-router-dom'
+
+
 const AnimeSearch = props => {
 	//set states for 
 	let [animeName, setAnimeName] = useState('')
@@ -55,6 +57,7 @@ const AnimeSearch = props => {
 			</div>
 		)
 	})
+
 
   return (
 	  <div>
