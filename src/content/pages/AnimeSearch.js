@@ -9,6 +9,7 @@ const AnimeSearch = props => {
 	let [animeId, setAnimeId] = useState('')
 
 	useEffect(() => {
+		getFaves()
 	}, [])
 	const getAnimeData = e => {
 		e.preventDefault()
@@ -46,6 +47,52 @@ const AnimeSearch = props => {
 		console.log('hi')
 		props.getAnimeId(id)
 	}
+	//used to test if faves for user has been set
+	const getFaves = () => {
+		let tester;
+		fetch(process.env.REACT_APP_SERVER_URL + 'favorites/' + props.user._id, {
+	      method: 'GET',
+	      headers: {
+	        'Content-Type': 'application/json'
+	      }
+	    })
+	   	.then(response => response.json()
+		    .then(response => {
+		    	console.log(response)
+		    	tester = response
+		    	console.log(tester)
+		    })
+		    .catch(err => {
+		    	tester = 'failure'
+		    	addFavesData()
+		    	console.log(err)
+			})
+		)
+		.catch(err => {
+		    	console.log(err)
+		})
+		
+	}
+	//initilaize faves data for user if not done yet
+	const addFavesData = () => {
+  		fetch(process.env.REACT_APP_SERVER_URL + 'favorites', {
+	      method: 'POST',
+	      body: JSON.stringify({
+	      	user: props.user._id
+	      }),
+	      headers: {
+	        'Content-Type': 'application/json'
+	      }
+	    })
+	    .then(response => {
+	    	console.log(response)
+	    })
+	    .catch(err => {
+	    	console.log(err)
+		})
+	}
+
+	console.log()
 
 	let animeShow = animeList.map((a, i) => {
 		return (
