@@ -114,6 +114,10 @@ object-fit:cover;
  
 }
 
+.commentButton {
+  display: inline-block;
+}
+
 h2 {
  background-color: #181818;
   margin: 0;        
