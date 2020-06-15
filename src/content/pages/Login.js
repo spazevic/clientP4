@@ -10,6 +10,7 @@ const Login = props => {
 
   // Event handlers
   const handleSubmit = e => {
+    let token = localStorage.getItem('boilerToken')
     e.preventDefault()
     fetch(process.env.REACT_APP_SERVER_URL + 'auth/login', {
       method: 'POST',
@@ -18,6 +19,7 @@ const Login = props => {
         password
       }),
       headers: {
+        'Authorization': `Bearer ${token}`,
         'Content-Type': 'application/json'
       }
     })
