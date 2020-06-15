@@ -33,7 +33,7 @@ const AnimeInfo = props => {
 		})
 		}
 	}
-
+	console.log('work')
 	//sets initial state for comment on a page if no comments have been added
 	const addCommentData = () => {
   		fetch(process.env.REACT_APP_SERVER_URL + 'comment', {
