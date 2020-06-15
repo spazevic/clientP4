@@ -117,12 +117,13 @@ const Profile = props => {
 			</div>
 		<h2>{props.user.username}</h2>
 		<img src={props.user.pic} alt="user pic" className="profilePic" />
+		<h3>Bio: {props.user.bio}</h3>
 		<Link to='editprofile'>Edit your Profile</Link>
 		<h2>{secretMessage}</h2>
 		<div>
-		<h1>Rated Anime </h1>
+		<h1>Favorite Anime </h1>
 		{favList}
-		<h1>Anime in queue list</h1>
+		<h1>Queue list</h1>
 		{queueList}
 
 		</div>
