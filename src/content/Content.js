@@ -9,6 +9,7 @@ import Profile from './pages/Profile'
 import Signup from './pages/Signup'
 import AnimeSearch from './pages/AnimeSearch'
 import AnimeInfo from './pages/AnimeInfo'
+import EditProfile from './pages/EditProfile'
 
 
 
@@ -37,6 +38,9 @@ const Content = props => {
       } />
       <Route path="/signup" render={
         () => <Signup user={props.user} updateToken={props.updateToken} />
+      } />
+       <Route path="/editprofile" render={
+        () => <EditProfile user={props.user}  />
       } />
     </div>
   )
