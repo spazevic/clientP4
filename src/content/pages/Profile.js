@@ -41,6 +41,7 @@ const Profile = props => {
 	}
 
 	const getPlaylist = () => {
+		if (props.user) {
 		fetch(process.env.REACT_APP_SERVER_URL + 'playlist/' + props.user._id, {
 	      method: 'GET',
 	      headers: {
@@ -60,10 +61,11 @@ const Profile = props => {
 		.catch(err => {
 		    	console.log(err)
 		})
-		
+		}
 	}
 
 	const getFaves = () => {
+		if (props.user) {
 		fetch(process.env.REACT_APP_SERVER_URL + 'favorites/' + props.user._id, {
 	      method: 'GET',
 	      headers: {
@@ -83,6 +85,7 @@ const Profile = props => {
 		.catch(err => {
 		    	console.log(err)
 		})
+		}
 	}
 	//get list of all rated anime
 	let favList = faves.map((f, i) => {

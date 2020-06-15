@@ -18,9 +18,9 @@ const AnimeInfo = props => {
 		getFaves()
 		getPlaylist()
 	}, [refresher])
-
 	//loads data for the specific anime 
 	const getAnimeData = () => {
+		if(props.animeId) {
 		fetch('https://api.jikan.moe/v3/anime/' + props.animeId)
 		.then(response => response.json())
 		.then(data => {
@@ -31,6 +31,7 @@ const AnimeInfo = props => {
 		.catch(err => {
 			console.log(err)
 		})
+		}
 	}
 
 	//sets initial state for comment on a page if no comments have been added
@@ -77,6 +78,7 @@ const AnimeInfo = props => {
 	}
 	//this loads the comments for the specific page
 	const getComments = () => {
+		if (props.animeId){
 		fetch(process.env.REACT_APP_SERVER_URL + 'comment/' + props.animeId, {
 	      method: 'GET',
 	      headers: {
@@ -96,6 +98,7 @@ const AnimeInfo = props => {
 		.catch(err => {
 		    	console.log(err)
 		})
+		}
 	}
 
 	//this adds to the users anime favorites
@@ -126,6 +129,7 @@ const AnimeInfo = props => {
 
 	//this loads all animes rated by the user to check if the current has been rated
 	const getFaves = () => {
+		if (props.user) {
 		fetch(process.env.REACT_APP_SERVER_URL + 'favorites/' + props.user._id, {
 	      method: 'GET',
 	      headers: {
@@ -150,6 +154,7 @@ const AnimeInfo = props => {
 		.catch(err => {
 		    	console.log(err)
 		})
+		}
 	}
 
 	//this loads the user list, this is to assign the user for each comment that was posted
@@ -175,6 +180,7 @@ const AnimeInfo = props => {
 	}
 	//this loads the entire queuelist of the user to check if teh current anime is on it or not
 	const getPlaylist = () => {
+		if (props.user) {
 		fetch(process.env.REACT_APP_SERVER_URL + 'playlist/' + props.user._id, {
 	      method: 'GET',
 	      headers: {
@@ -194,7 +200,7 @@ const AnimeInfo = props => {
 		.catch(err => {
 		    	console.log(err)
 		})
-		
+		}
 	}
 
 	//this adds an anime to the queue list, defaults to watched
@@ -224,6 +230,7 @@ const AnimeInfo = props => {
 
 	//this allwos the user to change the watch status of the anime
 	const setQueueStatus = e => {
+		if (props.animeId) {
 		e.preventDefault()
 		console.log('hehe XD')
 		fetch(process.env.REACT_APP_SERVER_URL + 'playlist/' + props.animeId, {
@@ -246,9 +253,11 @@ const AnimeInfo = props => {
 	    .catch(err => {
 	    	console.log(err)
 		})
+		}
 	}
 	//this allows the user to edit their current rating for the anime
 	const setNewRating= e => {
+		if (props.animeId) {
 		e.preventDefault()
 		console.log('hehe XD')
 		fetch(process.env.REACT_APP_SERVER_URL + 'favorites/' + props.animeId, {
@@ -270,8 +279,9 @@ const AnimeInfo = props => {
 	    	console.log(response)
 	    })
 	    .catch(err => {
-	    	console.log(err)
+	    	console.log(err,)
 		})
+		}
 	}
 
 	//this loads all the genres for the displayed anime
@@ -357,9 +367,7 @@ const AnimeInfo = props => {
 		}
 	})
 	
-
-
-
+if (props.user && props.animeId) {
   return (
     <div>
 
@@ -393,5 +401,12 @@ const AnimeInfo = props => {
 	  </div>
     </div>
   )
+} else {
+	return (
+		<div>Please search for the anime again, something went wrong</div>
+	)
 }
+}
+
+
 export default AnimeInfo

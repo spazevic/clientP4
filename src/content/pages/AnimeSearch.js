@@ -50,7 +50,7 @@ const AnimeSearch = props => {
 	}
 	//used to test if faves for user has been set
 	const getFaves = () => {
-		let tester;
+		if (props.user) {
 		fetch(process.env.REACT_APP_SERVER_URL + 'favorites/' + props.user._id, {
 	      method: 'GET',
 	      headers: {
@@ -60,11 +60,8 @@ const AnimeSearch = props => {
 	   	.then(response => response.json()
 		    .then(response => {
 		    	console.log(response)
-		    	tester = response
-		    	console.log(tester)
 		    })
 		    .catch(err => {
-		    	tester = 'failure'
 		    	addFavesData()
 		    	console.log(err)
 			})
@@ -72,6 +69,7 @@ const AnimeSearch = props => {
 		.catch(err => {
 		    	console.log(err)
 		})
+		}	
 		
 	}
 	//initilaize faves data for user if not done yet
@@ -94,8 +92,7 @@ const AnimeSearch = props => {
 	}
 
 	const getPlaylist = () => {
-		console.log('sup')
-		let tester;
+		if(props.user) {
 		fetch(process.env.REACT_APP_SERVER_URL + 'playlist/' + props.user._id, {
 	      method: 'GET',
 	      headers: {
@@ -105,11 +102,8 @@ const AnimeSearch = props => {
 	   	.then(response => response.json()
 		    .then(response => {
 		    	console.log(response)
-		    	tester = response
-		    	console.log(tester)
 		    })
 		    .catch(err => {
-		    	tester = 'failure'
 		    	addPlaylistData()
 		    	console.log(err)
 			})
@@ -117,6 +111,7 @@ const AnimeSearch = props => {
 		.catch(err => {
 		    	console.log(err)
 		})
+	}
 		
 	}
 	//initialize state for playlist if not done for user yet
