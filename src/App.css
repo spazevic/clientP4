@@ -49,7 +49,13 @@ nav a:visited {
   font-size: 22px;
   color: peachpuff;
 }
-
+.animeTitle{
+  color: skyblue;
+}
+/* .animeGrid {
+  display: grid;
+  grid-template-columns: 200px 200px center;
+} */
 .animeContainer {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
@@ -80,7 +86,7 @@ object-fit: cover;
 }
 .profileB {
 background-image: url(https://steamuserimages-a.akamaihd.net/ugc/781858274434559240/5A111FF68B6C3C22EBA7147BFD87232C12D2AAD3/);
-height: 20vh;
+height: 40vh;
 background-size: cover; 
 background-position: center;
 object-fit:cover;
@@ -114,16 +120,34 @@ object-fit:cover;
  
 }
 
-.commentButton {
-  display: inline-block;
-}
-
 h2 {
  background-color: #181818;
   margin: 0;        
   color: peachpuff;      
 }
 
+.profilePic {
+max-width: 500px;
+max-height: auto;
+text-align: center;
+}
+/* .imgFloat {
+  float: left;
+} */
+.synFloat {
+  color: darkmagenta;
+}
+
+/* h1 {
+  background-color: black;
+  color: peachpuff;
+} */
+.genreCSS {
+  color: red;
+}
+.genreList {
+  color: green;
+}
 /* .animeB {
   background-color: peachpuff;
 } */

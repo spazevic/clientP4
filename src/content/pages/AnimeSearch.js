@@ -152,10 +152,12 @@ const AnimeSearch = props => {
 
   return (
 	  <div>
+	  
     <div class="animeSearchB">
       <form onSubmit={getAnimeData}>
-      	<input name='name' type='text'onChange={e => 
+      	<input name='name' type='text' placeholder='Anime Search' onChange={e => 
       		setName(e.target.value)}/>
+			  <input type='submit' value='Search' />
       </form>
 	  </div>
       <div className="animeContainer">

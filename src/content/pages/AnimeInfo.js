@@ -370,9 +370,8 @@ const AnimeInfo = props => {
 if (props.user && props.animeId) {
   return (
     <div>
-
-    	<div>
-    		<h1>{animeData.title}</h1>
+    	<div class="animeTitle">
+			<h1><strong>{animeData.title}</strong></h1>
     	</div>
     	Your rating is: {currentRating}
     	{rating}
@@ -381,18 +380,18 @@ if (props.user && props.animeId) {
     		{animeData.score}
       	</div>
       	<div>
-      		<img src={animeData.image_url} />
+      		<div class="imgFloat"><img src={animeData.image_url} /></div>
+      		<div class="synFloat">{animeData.synopsis}</div>
       	</div>
       	<div>
-      		{animeData.synopsis}
-      		<h3>List of genres</h3>
-      		{genreList}
+      		<div class="genreCSS"><h3>List of genres</h3></div>
+      		<div class="genreList">{genreList}</div>
       		<form onSubmit={addNewComment}>
 	    		<input type='text' name='newComment' type='text'onChange={e => 
 	      		setNewComment(e.target.value)}/>
     			<input type='submit' value='Add New Comment' />
     		</form>
-      		{commentList}
+    		{commentList}
       	</div>
 
 	  <div>

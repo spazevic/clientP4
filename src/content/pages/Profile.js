@@ -116,7 +116,7 @@ const Profile = props => {
 		   <div class="profileB">
 			   </div>
       <h2>{props.user.username}</h2>
-      <img src={props.user.pic} alt="user pic" />
+      <img src={props.user.pic} alt="user pic" className="profilePic" />
 	  
       <h2>{secretMessage}</h2>
       <div>
