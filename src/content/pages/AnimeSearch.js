@@ -10,6 +10,7 @@ const AnimeSearch = props => {
 
 	useEffect(() => {
 		getFaves()
+		getPlaylist()
 	}, [])
 	const getAnimeData = e => {
 		e.preventDefault()
@@ -92,6 +93,52 @@ const AnimeSearch = props => {
 		})
 	}
 
+	const getPlaylist = () => {
+		console.log('sup')
+		let tester;
+		fetch(process.env.REACT_APP_SERVER_URL + 'playlist/' + props.user._id, {
+	      method: 'GET',
+	      headers: {
+	        'Content-Type': 'application/json'
+	      }
+	    })
+	   	.then(response => response.json()
+		    .then(response => {
+		    	console.log(response)
+		    	tester = response
+		    	console.log(tester)
+		    })
+		    .catch(err => {
+		    	tester = 'failure'
+		    	addPlaylistData()
+		    	console.log(err)
+			})
+		)
+		.catch(err => {
+		    	console.log(err)
+		})
+		
+	}
+	//initialize state for playlist if not done for user yet
+	const addPlaylistData = () => {
+  		fetch(process.env.REACT_APP_SERVER_URL + 'playlist', {
+	      method: 'POST',
+	      body: JSON.stringify({
+	      	user: props.user._id
+	      }),
+	      headers: {
+	        'Content-Type': 'application/json'
+	      }
+	    })
+	    .then(response => {
+	    	console.log(response)
+	    })
+	    .catch(err => {
+	    	console.log(err)
+		})
+	}
+
+
 	console.log()
 
 	let animeShow = animeList.map((a, i) => {
@@ -109,7 +156,6 @@ const AnimeSearch = props => {
   return (
 	  <div>
     <div class="animeSearchB">
-      Anime Stub!
       <form onSubmit={getAnimeData}>
       	<input name='name' type='text'onChange={e => 
       		setName(e.target.value)}/>

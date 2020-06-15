@@ -1,20 +1,25 @@
 import React, {useEffect, useState} from 'react'
 const AnimeInfo = props => {
+	//most os these states hold varbiles which are passed into the backend in order to update the info in regards to the anime or user
 	let [animeData, setAnimeData] = useState({})
 	let [newComment, setNewComment] = useState('')
 	let [comments, setComments] = useState({})
 	let [currentRating, setCurrentRating] = useState()
 	let [userList, setUserList] = useState([])
 	let [userRating, setUserRating] = useState()
+	let [playlist, setPlaylist] = useState([])
+	let [watchState, setWatchState] = useState('')
+	//this is my sneaky refresher which updates the page on a change of the status of any comments, queues, or ratings
+	let [refresher, setRefresher] = useState('')
 	useEffect(() => {
 		getAnimeData()
-		if (!comments.length) {
-			addCommentData()
-		}
 		getComments()
 		findUsers()
 		getFaves()
-	}, [])
+		getPlaylist()
+	}, [refresher])
+
+	//loads data for the specific anime 
 	const getAnimeData = () => {
 		fetch('https://api.jikan.moe/v3/anime/' + props.animeId)
 		.then(response => response.json())
@@ -28,6 +33,7 @@ const AnimeInfo = props => {
 		})
 	}
 
+	//sets initial state for comment on a page if no comments have been added
 	const addCommentData = () => {
   		fetch(process.env.REACT_APP_SERVER_URL + 'comment', {
 	      method: 'POST',
@@ -39,6 +45,7 @@ const AnimeInfo = props => {
 	      }
 	    })
 	    .then(response => {
+	    	setRefresher(Math.random())
 	    	console.log(response)
 	    })
 	    .catch(err => {
@@ -46,6 +53,7 @@ const AnimeInfo = props => {
 		})
 	}
 
+	//this adds a new comment to the current anime page
 	const addNewComment = e => {
 		e.preventDefault()
   		fetch(process.env.REACT_APP_SERVER_URL + 'comment', {
@@ -60,6 +68,7 @@ const AnimeInfo = props => {
 	      }
 	    })
 	    .then(response => {
+	    	setRefresher(Math.random())
 	    	console.log(response)
 	    })
 	    .catch(err => {
@@ -78,9 +87,9 @@ const AnimeInfo = props => {
 		    .then(response => {
 		    	console.log(response.userComment)
 		    	setComments(response)
-
 		    })
 		    .catch(err => {
+		    	addCommentData()
 		    	console.log(err)
 			})
 		)
@@ -88,25 +97,7 @@ const AnimeInfo = props => {
 		    	console.log(err)
 		})
 	}
-	//this sets the initial favorites db for the user, 
-	//only accessed if they havent favorited anything
-	// const addFavesData = () => {
- //  		fetch(process.env.REACT_APP_SERVER_URL + 'favorites', {
-	//       method: 'POST',
-	//       body: JSON.stringify({
-	//       	user: props.user._id
-	//       }),
-	//       headers: {
-	//         'Content-Type': 'application/json'
-	//       }
-	//     })
-	//     .then(response => {
-	//     	console.log(response)
-	//     })
-	//     .catch(err => {
-	//     	console.log(err)
-	// 	})
-	// }
+
 	//this adds to the users anime favorites
 	const addNewFaves = e => {
 		e.preventDefault()
@@ -125,6 +116,7 @@ const AnimeInfo = props => {
 	      }
 	    })
 	    .then(response => {
+	    	setRefresher(Math.random())
 	    	console.log(response)
 	    })
 	    .catch(err => {
@@ -132,6 +124,7 @@ const AnimeInfo = props => {
 		})
 	}
 
+	//this loads all animes rated by the user to check if the current has been rated
 	const getFaves = () => {
 		fetch(process.env.REACT_APP_SERVER_URL + 'favorites/' + props.user._id, {
 	      method: 'GET',
@@ -180,8 +173,106 @@ const AnimeInfo = props => {
 		    	console.log(err)
 		})
 	}
-	console.log(userList)
+	//this loads the entire queuelist of the user to check if teh current anime is on it or not
+	const getPlaylist = () => {
+		fetch(process.env.REACT_APP_SERVER_URL + 'playlist/' + props.user._id, {
+	      method: 'GET',
+	      headers: {
+	        'Content-Type': 'application/json'
+	      }
+	    })
+	   	.then(response => response.json()
+		    .then(response => {
+		    	console.log(response)
+		    	setPlaylist(response.animePlaylist)
+		    	console.log(response.animePlaylist)
+		    })
+		    .catch(err => {
+		    	console.log(err)
+			})
+		)
+		.catch(err => {
+		    	console.log(err)
+		})
+		
+	}
 
+	//this adds an anime to the queue list, defaults to watched
+	const addNewQueue = e => {
+		e.preventDefault()
+  		fetch(process.env.REACT_APP_SERVER_URL + 'playlist', {
+	      method: 'Put',
+	      body: JSON.stringify({
+	      	user: props.user._id,
+	      	title: animeData.title,
+            queue: 'Watched',
+            animeId: props.animeId 
+
+	      }),
+	      headers: {
+	        'Content-Type': 'application/json'
+	      }
+	    })
+	    .then(response => {
+	    	setRefresher(Math.random())
+	    	console.log(response)
+	    })
+	    .catch(err => {
+	    	console.log(err)
+		})
+	}
+
+	//this allwos the user to change the watch status of the anime
+	const setQueueStatus = e => {
+		e.preventDefault()
+		console.log('hehe XD')
+		fetch(process.env.REACT_APP_SERVER_URL + 'playlist/' + props.animeId, {
+	      method: 'Put',
+	      body: JSON.stringify({
+	      	user: props.user._id,
+	      	title: animeData.title,
+            queue: watchState,
+            animeId: props.animeId 
+
+	      }),
+	      headers: {
+	        'Content-Type': 'application/json'
+	      }
+	    })
+	    .then(response => {
+	    	setRefresher(Math.random())
+	    	console.log(response)
+	    })
+	    .catch(err => {
+	    	console.log(err)
+		})
+	}
+	//this allows the user to edit their current rating for the anime
+	const setNewRating= e => {
+		e.preventDefault()
+		console.log('hehe XD')
+		fetch(process.env.REACT_APP_SERVER_URL + 'favorites/' + props.animeId, {
+	      method: 'Put',
+	      body: JSON.stringify({
+	      	user: props.user._id,
+	      	title: animeData.title,
+            rating: userRating,
+            genre: animeData.genres,
+            animeId: props.animeId 
+
+	      }),
+	      headers: {
+	        'Content-Type': 'application/json'
+	      }
+	    })
+	    .then(response => {
+	    	setRefresher(Math.random())
+	    	console.log(response)
+	    })
+	    .catch(err => {
+	    	console.log(err)
+		})
+	}
 
 	//this loads all the genres for the displayed anime
 	let genreList;
@@ -197,14 +288,11 @@ const AnimeInfo = props => {
 		})
 	}
 
-	console.log(comments)
 	//loads the comments for displayed anime
 	let commentList;
 	if (comments.animeId) {
 		console.log('hey bro i got comments')
 		commentList = comments.userComment.map((c, i) => {
-			console.log(props.user)
-			console.log(c.user)
 			let name
 			for (let i =0; i < userList.length; i++) {
 				if (c.user == userList[i]._id) {
@@ -220,12 +308,18 @@ const AnimeInfo = props => {
 			)
 		})
 	}
-
+	//get current rating of anime from user
 	let rating;
-	console.log(currentRating)
 	if(currentRating) {
 		rating = (
-			<div>kek</div>
+			<div>
+			Edit Rating
+			<form onSubmit={setNewRating}>
+				<input type='number' min='1' max='10' onChange={e => 
+      			setUserRating(e.target.value)}/>
+				<input type='submit' />
+			</form>
+			</div>
 		)
 
 	} else {
@@ -237,6 +331,31 @@ const AnimeInfo = props => {
       	</form>
 		)
 	}
+	//sets default add to queue form for user
+	let queueMaster = (
+		<form onSubmit={addNewQueue}>
+	    	<input type='submit' value='add to queue' />
+	    </form>
+	)
+	//checks if user has added anime ot queue list, if they have repalces default form with an edit form
+	let statusCheck = playlist.map((p, i) => {
+		if (p.animeId == props.animeId) {
+			queueMaster = (
+				<div>
+				{p.queue}
+				<form onSubmit={setQueueStatus}>
+		    		<select id='status' name='status' onChange={e => 
+      				setWatchState(e.target.value)} >
+		    			<option value='Watched'>Watched </option>
+		    			<option value='Watching'>Currently Watching</option>
+		    			<option value='Plan to watch'>Plan to Watch</option>
+		    		</select>
+		    		<input type='submit' value='Set Status' />
+	    		</form>
+	    		</div>
+			)
+		}
+	})
 	
 
 
@@ -245,15 +364,10 @@ const AnimeInfo = props => {
     <div>
 
     	<div>
-    		{animeData.title}
+    		<h1>{animeData.title}</h1>
     	</div>
-    	<div>hi</div>
-    	<form onSubmit={addNewComment}>
-    		<input type='text' name='newComment' type='text'onChange={e => 
-      		setNewComment(e.target.value)}/>
-    		<input type='submit' value='Add New Comment' />
-    	</form>
     	{rating}
+    	{queueMaster}
     	<div>
     		{animeData.score}
       	</div>
@@ -264,6 +378,11 @@ const AnimeInfo = props => {
       	<div>
       		{animeData.synopsis}
       		{genreList}
+      		<form onSubmit={addNewComment}>
+	    		<input type='text' name='newComment' type='text'onChange={e => 
+	      		setNewComment(e.target.value)}/>
+    			<input type='submit' value='Add New Comment' />
+    		</form>
       		{commentList}
       	</div>
 
