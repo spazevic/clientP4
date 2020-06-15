@@ -96,12 +96,14 @@ const AnimeSearch = props => {
 
 	let animeShow = animeList.map((a, i) => {
 		return (
+		
 			<div key={i} onClick={() => getId(a.mal_id)}>
 			<Link to='/animeinfo'>
 			<div>{a.title}</div>
 			<img src={a.image_url} />
 			</Link>
 			</div>
+	
 		)
 	})
 
