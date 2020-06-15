@@ -27,7 +27,7 @@ const Content = props => {
         () => <Login user={props.user} updateToken={props.updateToken} />
       } />
       <Route path="/profile" render={
-        () => <Profile user={props.user} />
+        () => <Profile user={props.user} getAnimeId={getAnimeId}/>
       } />
       <Route path="/anime" render={
         () => <AnimeSearch user={props.user} getAnimeId={getAnimeId}/>
