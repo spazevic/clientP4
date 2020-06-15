@@ -10,6 +10,7 @@ const AnimeSearch = props => {
 
 	useEffect(() => {
 		getFaves()
+		getPlaylist()
 	}, [])
 	const getAnimeData = e => {
 		e.preventDefault()
@@ -49,7 +50,7 @@ const AnimeSearch = props => {
 	}
 	//used to test if faves for user has been set
 	const getFaves = () => {
-		let tester;
+		if (props.user) {
 		fetch(process.env.REACT_APP_SERVER_URL + 'favorites/' + props.user._id, {
 	      method: 'GET',
 	      headers: {
@@ -59,11 +60,8 @@ const AnimeSearch = props => {
 	   	.then(response => response.json()
 		    .then(response => {
 		    	console.log(response)
-		    	tester = response
-		    	console.log(tester)
 		    })
 		    .catch(err => {
-		    	tester = 'failure'
 		    	addFavesData()
 		    	console.log(err)
 			})
@@ -71,6 +69,7 @@ const AnimeSearch = props => {
 		.catch(err => {
 		    	console.log(err)
 		})
+		}	
 		
 	}
 	//initilaize faves data for user if not done yet
@@ -92,16 +91,61 @@ const AnimeSearch = props => {
 		})
 	}
 
+	const getPlaylist = () => {
+		if(props.user) {
+		fetch(process.env.REACT_APP_SERVER_URL + 'playlist/' + props.user._id, {
+	      method: 'GET',
+	      headers: {
+	        'Content-Type': 'application/json'
+	      }
+	    })
+	   	.then(response => response.json()
+		    .then(response => {
+		    	console.log(response)
+		    })
+		    .catch(err => {
+		    	addPlaylistData()
+		    	console.log(err)
+			})
+		)
+		.catch(err => {
+		    	console.log(err)
+		})
+	}
+		
+	}
+	//initialize state for playlist if not done for user yet
+	const addPlaylistData = () => {
+  		fetch(process.env.REACT_APP_SERVER_URL + 'playlist', {
+	      method: 'POST',
+	      body: JSON.stringify({
+	      	user: props.user._id
+	      }),
+	      headers: {
+	        'Content-Type': 'application/json'
+	      }
+	    })
+	    .then(response => {
+	    	console.log(response)
+	    })
+	    .catch(err => {
+	    	console.log(err)
+		})
+	}
+
+
 	console.log()
 
 	let animeShow = animeList.map((a, i) => {
 		return (
+		
 			<div key={i} onClick={() => getId(a.mal_id)}>
 			<Link to='/animeinfo'>
 			<div>{a.title}</div>
 			<img src={a.image_url} />
 			</Link>
 			</div>
+	
 		)
 	})
 
@@ -109,7 +153,6 @@ const AnimeSearch = props => {
   return (
 	  <div>
     <div class="animeSearchB">
-      Anime Stub!
       <form onSubmit={getAnimeData}>
       	<input name='name' type='text'onChange={e => 
       		setName(e.target.value)}/>
