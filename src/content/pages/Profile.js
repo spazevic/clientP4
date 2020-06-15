@@ -131,7 +131,7 @@ const Profile = props => {
       <div style={{fontSize: "10px", color: "#cccccc",lineBreak: "anywhere", wordBreak: "normal", overflow: "hidden", whiteSpace: "nowrap", textOverflow: "ellipsis", fontFamily: "Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif", fontWeight: "100"}}>
 	  <a href="https://soundcloud.com/okami_dende" title="Dendé" target="_blank" style={{color: "#cccccc", textDecoration: "none"}}>Dendé</a> · <a href="https://soundcloud.com/okami_dende/naruto-blue-bird-hip-hop-remix" title="Naruto Blue Bird Hip Hop remix" target="_blank" style={{color: "#cccccc", textDecoration: "none"}}>Naruto Blue Bird Hip Hop remix</a></div>
 	</div>
-		<Link to='editprofile'>here</Link>
+	<Link to='editprofile'>Edit Profile</Link>
 	</div>
   )
   

@@ -38,7 +38,7 @@ const EditProfile = props => {
     fetch(process.env.REACT_APP_SERVER_URL + 'profile/' + props.user._id, {
       method: 'POST',
       headers: {
-				'Authorization': `Bearer ${token}`
+			'Authorization': `Bearer ${token}`
 			},
       body: JSON.stringify({
         pic: profileUrl,
@@ -65,7 +65,7 @@ const EditProfile = props => {
 
   return (
     <div>
-      <h2>Signup</h2>
+      <h2>Edit</h2>
       <span className="red"></span>
       <form onSubmit={handleSubmit}>
         <div class="signupB">
