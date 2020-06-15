@@ -103,7 +103,7 @@ const Profile = props => {
 		return (
 			<div key={i} onClick={() => getId(p.animeId)}>
 				<Link to='/animeinfo'>
-				<h3>{p.title}</h3> Rating: {p.queue}
+				<h3>{p.title}</h3> Status: {p.queue}
 				</Link>
 			</div>
 		)

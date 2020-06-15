@@ -8,7 +8,7 @@ const AnimeInfo = props => {
 	let [userList, setUserList] = useState([])
 	let [userRating, setUserRating] = useState()
 	let [playlist, setPlaylist] = useState([])
-	let [watchState, setWatchState] = useState('')
+	let [watchState, setWatchState] = useState('Watched')
 	//this is my sneaky refresher which updates the page on a change of the status of any comments, queues, or ratings
 	let [refresher, setRefresher] = useState('')
 	useEffect(() => {
@@ -312,7 +312,7 @@ const AnimeInfo = props => {
 			}
 			return (
 				<div key = {i}>
-				{name}
+				<strong>{name}:{" "}</strong>
 				{c.body}
 				</div>
 			)
@@ -323,11 +323,11 @@ const AnimeInfo = props => {
 	if(currentRating) {
 		rating = (
 			<div>
-			Edit Rating
 			<form onSubmit={setNewRating}>
+				<label>Edit Rating: {" "}</label>
 				<input type='number' min='1' max='10' onChange={e => 
       			setUserRating(e.target.value)}/>
-				<input type='submit' />
+				<input type='submit' value='edit'/>
 			</form>
 			</div>
 		)
@@ -374,17 +374,18 @@ if (props.user && props.animeId) {
     	<div>
     		<h1>{animeData.title}</h1>
     	</div>
+    	Your rating is: {currentRating}
     	{rating}
     	{queueMaster}
     	<div>
     		{animeData.score}
       	</div>
-      	{currentRating}
       	<div>
       		<img src={animeData.image_url} />
       	</div>
       	<div>
       		{animeData.synopsis}
+      		<h3>List of genres</h3>
       		{genreList}
       		<form onSubmit={addNewComment}>
 	    		<input type='text' name='newComment' type='text'onChange={e => 
